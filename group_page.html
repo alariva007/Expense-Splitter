@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Expense Splitter</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    {% include 'header.html' %}
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+
+    <h3>Group's Name: {{ group_name }}</h3>
+
+    <p></p>
+
+    <h3>Group Members:</h3>
+
+    {% for member in members %}
+    <div>
+        <h4>{{ member.get_username }}</h4>
+    </div>
+    <p></p>
+    {% endfor %}
+
+    {% if member_identity == "owner" %}
+    <form action="/groups_list/group_page" method="post">
+        {% csrf_token %}
+        <label for="">Add New Group Member (user must be your friend):</label>
+        <p></p>
+        <input type="text" id="username" name="username" placeholder="Enter friend's username here" Required>
+        <button type="submit" id="add_member" name="add_member">Add Member to Group?</button>
+        {% if group_name %}
+        <input type="hidden" id="group_name" name="group_name" value={{ group_name }}>
+        {% endif %}
+    </form>
+    <p></p>
+    <form action="/groups_list/group_page" method="post">
+        {% csrf_token %}
+        <label for="">Remove Current Group Member (user must already be group member):</label>
+        <p></p>
+        <input type="text" id="username" name="username" placeholder="Enter friend's username here" Required>
+        <button type="submit" id="remove_member" name="remove_member">Remove Member from Group?</button>
+        {% if group_name %}
+        <input type="hidden" id="group_name" name="group_name" value={{ group_name }}>
+        {% endif %}
+    </form>
+    <p></p>
+    {% endif %}
+
+    {% if member_identity == "member" %}
+    <form action="/groups_list/group_page" method="post">
+        {% csrf_token %}
+        <label for="">Leave Group (can only rejoin with an invite):</label>
+        <button type="submit" id="leave_group" name="leave_group">Leave this Group??</button>
+    </form>
+    <p></p>
+    {% endif %}
+
+    <h3>Expense List:</h3>
+
+    <script src="" async defer></script>
+
+    {% include 'footer.html' %}
+
+</body>
+
+</html>

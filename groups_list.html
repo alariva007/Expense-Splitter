@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Expense Splitter</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    {% include 'header.html' %}
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+
+    <h3>Groups List</h3>
+
+    {% for an_object in groups_toload %}
+    <div>
+        <h4>Group Name: {{ an_object.get_group_name }}</h4>
+        <h4>Group Owner's Username: {{ an_object.get_group_owner }}</h4>
+    </div>
+    {% empty %}
+    <h4>Your group's list is currently empty.</h4>
+    {% endfor %}
+
+    <form action="/groups_list" method="post">
+        {% csrf_token %}
+        <label for="">Create New Group:</label>
+        <p></p>
+        <input type="text" id="group_name" name="group_name" placeholder="Enter the group's name here" Required>
+        <button type="submit" id="create_group" name="create_group">Create New Group?</button>
+    </form>
+
+    <p></p>
+
+    <form action="/groups_list/group_page" method="post">
+        {% csrf_token %}
+        <label for="">Visit Group you are a Member of:</label>
+        <p></p>
+        <input type="text" id="group_name" name="group_name" placeholder="Enter the group's name here" Required>
+        <button type="submit" id="visit_group" name="visit_group">Visit This Group's Page?</button>
+    </form>
+
+    <p></p>
+
+    <script src="" async defer></script>
+
+    {% include 'footer.html' %}
+
+</body>
+
+</html>

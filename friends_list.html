@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Expense Splitter</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    {% include 'header.html' %}
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+
+    <h3>Friends List</h3>
+
+    {% for an_object in friends_toload %}
+    <h4>{{ an_object.get_username }}</h4>
+    {% empty %}
+    <h4>Your friend's list is currently empty.</h4>
+    {% endfor %}
+
+    <form action="/friends_list" method="post">
+        {% csrf_token %}
+        <input type="text" id="username" name="username" placeholder="Enter friend's Username" Required>
+        <button type="submit" id="add_friend" name="add_friend">Add Friend?</button>
+    </form>
+
+    <p></p>
+
+    <form action="/friends_list" method="post">
+        {% csrf_token %}
+        <input type="text" id="username" name="username" placeholder="Enter friend's Username" Required>
+        <button type="submit" id="remove_friend" name="remove_friend">Remove Friend?</button>
+    </form>
+
+    <p></p>
+
+    <script src="" async defer></script>
+
+    {% include 'footer.html' %}
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+{% load static %}
+<header>
+    <div id="header">
+
+        <div id="headerIMG">
+            <img src="{% static 'headerIMG.png' %}" />
+        </div>
+
+        <h1>Expense Splitter</h1>
+
+        <nav>
+            {% if user.is_authenticated %}
+            <ul>
+                <li id="navLink1">
+                    <a href="/">Home</a>
+                </li>
+                <li id="navLink2">
+                    <a href="/friends_list">Friends List</a>
+                </li>
+                <li id="navLink3">
+                    <a href="/groups_list">Groups List</a>
+                </li>
+                <li id="navLink4">
+                    <a href="/signout">Sign Out</a>
+                </li>
+            </ul>
+            {% else %}
+            <ul>
+                <li id="navLink1">
+                    <a href="/">Home</a>
+                </li>
+                <li id="navLink2">
+                    <a href="/signup">Sign Up</a>
+                </li>
+                <li id="navLink3">
+                    <a href="/signin">Sign In</a>
+                </li>
+            </ul>
+            {% endif %}
+        </nav>
+
+    </div>
+</header>

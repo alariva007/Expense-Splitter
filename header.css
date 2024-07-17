@@ -1,0 +1,27 @@
+header {
+    position: fixed;
+    width: 100%;
+
+}#header {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-image: url("static/headerIMG.png");
+}
+
+nav {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+}
+
+#navLink1 {
+    display: inline-block;
+}
+
+#navLink2 {
+    display: inline-block;
+}
+
+#navLink3 {
+    display: inline-block;
+}
